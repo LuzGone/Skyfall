@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * main
  */
@@ -13,6 +15,14 @@ public class main {
         System.out.println(boeing767);
         System.out.println(boeing777);
         System.out.println(boeing787);
-        //
+        //Criação do Voo
+        Voo voo1 = new Voo("JPA", 
+        "EUA", 
+        "H23", 
+        LocalDateTime.of(2023, 12, 29, 21, 30, 0), 
+        LocalDateTime.of(2023, 12, 29, 21, 30, 0), 
+        LocalDateTime.of(2023, 12, 30, 5, 30, 0), 
+        boeing787);
+        System.out.println(voo1);
     }
 }
