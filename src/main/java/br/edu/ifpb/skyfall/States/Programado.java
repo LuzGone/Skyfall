@@ -1,6 +1,11 @@
-public class Finalizado implements Status {
+package src.main.java.br.edu.ifpb.skyfall.States;
+import src.main.java.br.edu.ifpb.skyfall.Cliente;
+import src.main.java.br.edu.ifpb.skyfall.Voo;
+
+
+public class Programado implements Status  {
     private Voo voo;
-    public Finalizado(Voo voo){
+    public Programado(Voo voo){
         this.voo = voo;
     }
     public void proximoStatus(Status status){

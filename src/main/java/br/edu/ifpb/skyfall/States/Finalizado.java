@@ -1,9 +1,11 @@
+package src.main.java.br.edu.ifpb.skyfall.States;
+import src.main.java.br.edu.ifpb.skyfall.Cliente;
+import src.main.java.br.edu.ifpb.skyfall.Voo;
 
 
-
-public class Cancelado {
+public class Finalizado implements Status {
     private Voo voo;
-    public Cancelado(Voo voo){
+    public Finalizado(Voo voo){
         this.voo = voo;
     }
     public void proximoStatus(Status status){

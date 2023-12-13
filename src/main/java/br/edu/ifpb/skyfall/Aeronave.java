@@ -1,3 +1,4 @@
+package src.main.java.br.edu.ifpb.skyfall;
 public class Aeronave {
     private String tipo;
     private int quantidadeDeAssentos;

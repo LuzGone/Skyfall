@@ -1,3 +1,4 @@
+package src.main.java.br.edu.ifpb.skyfall.States;
 
 public interface Status {
 

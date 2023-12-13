@@ -1,6 +1,11 @@
-public class Programado implements Status  {
+package src.main.java.br.edu.ifpb.skyfall.States;
+import src.main.java.br.edu.ifpb.skyfall.Cliente;
+import src.main.java.br.edu.ifpb.skyfall.Voo;
+
+
+public class Atrasado {
     private Voo voo;
-    public Programado(Voo voo){
+    public Atrasado(Voo voo){
         this.voo = voo;
     }
     public void proximoStatus(Status status){

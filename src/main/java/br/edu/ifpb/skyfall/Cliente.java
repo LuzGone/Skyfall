@@ -1,3 +1,4 @@
+package src.main.java.br.edu.ifpb.skyfall;
 public class Cliente {
     private String nome;
     private String cpf;

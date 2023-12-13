@@ -1,7 +1,16 @@
+package src.main.java.br.edu.ifpb.skyfall;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+
+import src.main.java.br.edu.ifpb.skyfall.States.Atrasado;
+import src.main.java.br.edu.ifpb.skyfall.States.Cancelado;
+import src.main.java.br.edu.ifpb.skyfall.States.Confirmado;
+import src.main.java.br.edu.ifpb.skyfall.States.Finalizado;
+import src.main.java.br.edu.ifpb.skyfall.States.MudancaPortao;
+import src.main.java.br.edu.ifpb.skyfall.States.Programado;
+import src.main.java.br.edu.ifpb.skyfall.States.Status;
 
 public class Voo {
     private long codigo;

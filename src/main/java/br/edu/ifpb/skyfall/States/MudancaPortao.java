@@ -1,7 +1,10 @@
+package src.main.java.br.edu.ifpb.skyfall.States;
+import src.main.java.br.edu.ifpb.skyfall.Cliente;
+import src.main.java.br.edu.ifpb.skyfall.Voo;
 
-public class Confirmado {
+public class MudancaPortao {
     private Voo voo;
-    public Confirmado(Voo voo){
+    public MudancaPortao(Voo voo){
         this.voo = voo;
     }
     public void proximoStatus(Status status){
