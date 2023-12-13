@@ -77,6 +77,22 @@ public class Voo {
         return "Não há vagas.";
     }
 
+    public ArrayList<Cliente> getPassageiros(){
+        return this.passageiros;
+    }
+
+    public String getPortao(){
+        return this.portaoEmbarque;
+    }
+
+    public LocalDateTime getPrevisaoPartida(){
+        return this.previsaoPartida;
+    }
+
+    public LocalDateTime getPrevisaoChegada(){
+        return this.previsaoChegada;
+    }
+
     @Override
     public String toString(){
         DateTimeFormatter CUSTOM_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss");

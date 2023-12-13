@@ -4,6 +4,12 @@ public class Confirmado {
     public Confirmado(Voo voo){
         this.voo = voo;
     }
-    public void proximoStatus(){}
-    public void notificarMudancaDeEstado(){}
+    public void proximoStatus(Status status){
+        this.voo.setStatus(status);
+    }
+    public void notificarMudancaDeEstado(){
+        for (Cliente passageiro : voo.getPassageiros()) {
+            passageiro.receberNotificacao();
+        }
+    }
 }
