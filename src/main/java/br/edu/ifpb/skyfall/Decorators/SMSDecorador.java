@@ -1,12 +1,16 @@
 package src.main.java.br.edu.ifpb.skyfall.Decorators;
-import src.main.java.br.edu.ifpb.skyfall.States.Status;
 
 public class SMSDecorador extends DecoradorBase {
     public SMSDecorador(Notificador notificador) {
         super(notificador);
     }
-    public void notificarMudancaDeStatus(Status status) {
-        super.notificarMudancaDeStatus();
-        System.out.println("Enviando SMS...");
+
+    public void notificar(String mensagem){
+        super.notificar(mensagem);
+        this.notificarSMS(mensagem);
+    }
+
+    public void notificarSMS(String mensagem){
+        System.out.println("NOTIFICAÇÃO SMS: \n" + mensagem);
     }
 }

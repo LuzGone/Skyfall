@@ -13,7 +13,7 @@ import src.main.java.br.edu.ifpb.skyfall.States.Programado;
 import src.main.java.br.edu.ifpb.skyfall.States.Status;
 
 public class Voo {
-    private long codigo;
+    private Long codigo;
     private ArrayList<Cliente> passageiros;
     private Status status;
     private String origem;
@@ -48,35 +48,61 @@ public class Voo {
             this.assentosOcupados = 0;
     }
 
+    public Long getCodigo(){
+        return this.codigo;
+    }
+
+    public void notificarClientes(String notificacao){
+        for (Cliente cliente: this.passageiros){
+            cliente.receberNotificacao(notificacao);
+        }
+    }
+
     public void setStatus(Status status){
         this.status = status;
     }
 
-    public void cancelarVoo(){
-        this.status.proximoStatus((Status) new Cancelado(this));
+    public void cancelarVoo() throws Exception{
+        try{
+            this.status.cancelarVoo();
+        }catch(Exception e){
+            throw new Exception(e);
+        }
     }
 
-    public void atrasarVoo(Long minutos){
-        this.data.plusMinutes(minutos);
-        this.previsaoChegada.plusMinutes(minutos);
-        this.previsaoPartida.plusMinutes(minutos);
-        this.status.proximoStatus((Status) new Atrasado(this));
+    public void atrasarVoo(Long minutos) throws Exception{
+        try{
+            this.status.atrasarVoo(minutos);
+            this.data.plusMinutes(minutos);
+            this.previsaoChegada.plusMinutes(minutos);
+            this.previsaoPartida.plusMinutes(minutos);
+        }catch(Exception e){
+            throw new Exception(e);
+        }
     }
 
-    public void confirmarVoo(){
-        this.status.proximoStatus((Status) new Confirmado(this));
+    public void confirmarVoo() throws Exception{
+        try{
+            this.status.confirmarVoo();
+        }catch(Exception e){
+            throw new Exception(e);
+        }
     }
 
-    public void mudarPortao(String novoPortao){
-        this.portaoEmbarque = novoPortao;
-        this.status.proximoStatus((Status) new MudancaPortao(this));
+    public void mudarPortao(String novoPortao) throws Exception{
+        try{
+            this.portaoEmbarque = novoPortao;
+            this.status.mudarPortao(novoPortao);
+        }catch(Exception e){
+            throw new Exception(e);
+        }
     }
 
-    public void finalizarVoo(){
+    public void finalizarVoo() throws Exception{
         this.status.proximoStatus((Status) new Finalizado(this));
     }
 
-    public String venderPassagem(Cliente cliente){
+    public String cadastrarCliente(Cliente cliente){
         if(this.assentosDisponiveis>0){
             this.passageiros.add(cliente);
             this.assentosOcupados+=1;
@@ -84,6 +110,20 @@ public class Voo {
             return "Passagem Vendida. Cliente Cadastrado.";
         }
         return "Não há vagas.";
+    }
+
+    public String removerCliente(Cliente cliente){
+        try{
+            this.passageiros.remove(cliente);
+            return "Cliente removido com Sucesso";
+        }catch (Exception e){
+            return "Cliente não Encontrado";
+        }
+
+    }
+
+    public Status getStatus(){
+        return this.status;
     }
 
     public ArrayList<Cliente> getPassageiros(){

@@ -1,13 +1,16 @@
 package src.main.java.br.edu.ifpb.skyfall.Decorators;
 
-import src.main.java.br.edu.ifpb.skyfall.States.Status;
-
 public class EmailDecorador extends DecoradorBase{
     public EmailDecorador(Notificador notificador){
         super(notificador);
     }
-    public void notificarMudancaDeStatus(Status status){
-        super.notificarMudancaDeStatus();
-        System.out.println("Enviando email...");
+
+    public void notificar(String mensagem){
+        super.notificar(mensagem);
+        this.notificarEmail(mensagem);
+    }
+
+    public void notificarEmail(String mensagem){
+        System.out.println("NOTIFICAÇÃO EMAIL: \n" + mensagem);
     }
 }
