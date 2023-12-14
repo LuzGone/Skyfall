@@ -49,11 +49,11 @@ public class Confirmado implements Status{
     };
 
     public void mudarPortao(String novoPortao) throws Exception{
-        if(this.voo.getStatus() instanceof Programado){
+        if(this.voo.getStatus() instanceof Confirmado || this.voo.getStatus() instanceof Atrasado){
             this.proximoStatus(new MudancaPortao(this.voo));
             this.voo.notificarClientes("O Voo "+ this.voo.getCodigo() + " mudou para o portao: " + novoPortao + ".");
         }else{
-            throw new Exception("O voo só pode Mudar de Portão se estiver como Confirmado.");
+            throw new Exception("O voo só pode Mudar de Portão se estiver como Confirmado ou Atrasado.");
         }
     };
     

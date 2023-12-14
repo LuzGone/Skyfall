@@ -5,6 +5,7 @@ public class PushDecorador extends DecoradorBase{
         super(notificador);
     }
 
+    @Override
     public void notificar(String mensagem){
         super.notificar(mensagem);
         this.notificarPush(mensagem);

@@ -7,6 +7,7 @@ public class DecoradorBase implements Notificador {
         this.notificador = notificador;
     }
 
+    @Override
     public void notificar(String mensagem){
         this.notificador.notificar(mensagem);
     }

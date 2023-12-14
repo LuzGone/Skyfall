@@ -4,11 +4,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
-import src.main.java.br.edu.ifpb.skyfall.States.Atrasado;
-import src.main.java.br.edu.ifpb.skyfall.States.Cancelado;
-import src.main.java.br.edu.ifpb.skyfall.States.Confirmado;
-import src.main.java.br.edu.ifpb.skyfall.States.Finalizado;
-import src.main.java.br.edu.ifpb.skyfall.States.MudancaPortao;
 import src.main.java.br.edu.ifpb.skyfall.States.Programado;
 import src.main.java.br.edu.ifpb.skyfall.States.Status;
 
@@ -48,19 +43,39 @@ public class Voo {
             this.assentosOcupados = 0;
     }
 
+    //GETS
+
     public Long getCodigo(){
         return this.codigo;
     }
 
-    public void notificarClientes(String notificacao){
-        for (Cliente cliente: this.passageiros){
-            cliente.receberNotificacao(notificacao);
-        }
+    public Status getStatus(){
+        return this.status;
     }
+
+    public String getPortao(){
+        return this.portaoEmbarque;
+    }
+
+    public LocalDateTime getPrevisaoPartida(){
+        return this.previsaoPartida;
+    }
+
+    public LocalDateTime getPrevisaoChegada(){
+        return this.previsaoChegada;
+    }
+
+    public ArrayList<Cliente> getPassageiros(){
+        return this.passageiros;
+    }
+
+    //SETS
 
     public void setStatus(Status status){
         this.status = status;
     }
+
+    //Mudanças de Estado do Voo
 
     public void cancelarVoo() throws Exception{
         try{
@@ -73,9 +88,9 @@ public class Voo {
     public void atrasarVoo(Long minutos) throws Exception{
         try{
             this.status.atrasarVoo(minutos);
-            this.data.plusMinutes(minutos);
-            this.previsaoChegada.plusMinutes(minutos);
-            this.previsaoPartida.plusMinutes(minutos);
+            this.data = this.data.plusMinutes(minutos);
+            this.previsaoChegada = this.previsaoChegada.plusMinutes(minutos);
+            this.previsaoPartida = this.previsaoPartida.plusMinutes(minutos);
         }catch(Exception e){
             throw new Exception(e);
         }
@@ -99,17 +114,35 @@ public class Voo {
     }
 
     public void finalizarVoo() throws Exception{
-        this.status.proximoStatus((Status) new Finalizado(this));
+        try{
+            this.status.finalizarVoo();
+        }catch(Exception e){
+            throw new Exception(e);
+        }
     }
 
-    public String cadastrarCliente(Cliente cliente){
-        if(this.assentosDisponiveis>0){
-            this.passageiros.add(cliente);
-            this.assentosOcupados+=1;
-            this.assentosDisponiveis-=1;
-            return "Passagem Vendida. Cliente Cadastrado.";
+    //Funções como Publicadora
+
+    public void notificarClientes(String notificacao){
+        for (Cliente cliente: this.passageiros){
+            cliente.receberNotificacao(notificacao);
         }
-        return "Não há vagas.";
+    }
+
+    //Outras Funções
+
+    public String cadastrarCliente(Cliente cliente) throws Exception{
+        if(this.status instanceof Programado){
+            if(this.assentosDisponiveis>0){
+                this.passageiros.add(cliente);
+                this.assentosOcupados+=1;
+                this.assentosDisponiveis-=1;
+                return "Passagem Vendida. Cliente Cadastrado.";
+            }
+            throw new Exception("Não há vagas");
+        }else{
+            throw new Exception("Não pode cadastrar cliente com voo fora do estado de Programado");
+        }
     }
 
     public String removerCliente(Cliente cliente){
@@ -120,26 +153,6 @@ public class Voo {
             return "Cliente não Encontrado";
         }
 
-    }
-
-    public Status getStatus(){
-        return this.status;
-    }
-
-    public ArrayList<Cliente> getPassageiros(){
-        return this.passageiros;
-    }
-
-    public String getPortao(){
-        return this.portaoEmbarque;
-    }
-
-    public LocalDateTime getPrevisaoPartida(){
-        return this.previsaoPartida;
-    }
-
-    public LocalDateTime getPrevisaoChegada(){
-        return this.previsaoChegada;
     }
 
     @Override

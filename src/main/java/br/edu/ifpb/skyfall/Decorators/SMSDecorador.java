@@ -5,6 +5,7 @@ public class SMSDecorador extends DecoradorBase {
         super(notificador);
     }
 
+    @Override
     public void notificar(String mensagem){
         super.notificar(mensagem);
         this.notificarSMS(mensagem);
