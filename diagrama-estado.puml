@@ -1,0 +1,15 @@
+@startuml
+
+[*] --> Programado
+Programado --> Confirmado
+Programado --> Cancelado
+Confirmado --> Atrasado
+Confirmado --> MudancaPortao
+Confirmado --> Finalizado
+MudancaPortao --> Atrasado
+MudancaPortao --> Finalizado
+Atrasado --> Finalizado
+Cancelado --> [*]
+Finalizado --> [*]
+
+@enduml
