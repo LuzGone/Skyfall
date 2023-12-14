@@ -19,7 +19,7 @@ class Notificador{
 }
 class Voo{
 - codigo : Long
-- passageiros : ArrayList<Cliente>
+- passageiros : ArrayList<Passageiro>
 - status : Status
 - origem : String
 - destino : String
@@ -36,7 +36,7 @@ class Voo{
 + getPortao() : String
 + getPrevisaoPartida() : LocalDateTime
 + getPrevisaoChegada() : LocalDateTime
-+ getPassageiros() : ArrayList<Cliente>
++ getPassageiros() : ArrayList<Passageiro>
 + setStatus(status : Status) : void
 + cancelarVoo() : void
 + atrasarVoo(minutos : Long) : void
@@ -44,8 +44,8 @@ class Voo{
 + mudarPortao(novoPortao : String) : void
 + finalizarVoo() : void
 + notificarClientes(notificacao : String) : void
-+ cadastrarCliente(cliente : Cliente) : String
-+ removerCliente(cliente : Cliente) : String
++ cadastrarCliente(passageiro : Passageiro) : String
++ removerCliente(passageiro : Passageiro) : String
 + toString() : String
 }
 class Atrasado{
@@ -75,18 +75,18 @@ class SmsStrategy{
 + toString() : String
 }
 SmsStrategy ..|> NotificadorStrategy
-class Cliente{
+class Passageiro{
 - nome : String
 - cpf : String
 - notificador : Notificador
-+ Cliente(nome : String, cpf : String)
++ Passageiro(nome : String, cpf : String)
 + definirNotificador(notificadorStrategy : NotificadorStrategy) : void
 + getNome() : String
 + getCpf() : String
 + receberNotificacao(notificacao : String) : void
 + toString() : String
 }
-Cliente ..|> Assinante
+Passageiro ..|> Assinante
 class Programado{
 - voo : Voo
 + Programado(voo : Voo)
@@ -147,7 +147,7 @@ Voo--"- status" Status
 Voo--"- aeronave" Aeronave
 Atrasado--"- voo" Voo
 Finalizado--"- voo" Voo
-Cliente--"- notificador" Notificador
+Passageiro--"- notificador" Notificador
 Programado--"- voo" Voo
 Confirmado--"- voo" Voo
 Cancelado--"- voo" Voo

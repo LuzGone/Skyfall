@@ -9,7 +9,7 @@ import src.main.java.br.edu.ifpb.skyfall.States.Status;
 
 public class Voo {
     private Long codigo;
-    private ArrayList<Cliente> passageiros;
+    private ArrayList<Passageiro> passageiros;
     private Status status;
     private String origem;
     private String destino;
@@ -30,7 +30,7 @@ public class Voo {
         LocalDateTime previsaoChegada, 
         Aeronave aeronave){
             this.codigo = new Date().getTime();
-            this.passageiros = new ArrayList<Cliente>(aeronave.getQuantidaDeAssentos());
+            this.passageiros = new ArrayList<Passageiro>(aeronave.getQuantidaDeAssentos());
             this.status = new Programado(this);
             this.origem = origem;
             this.destino = destino;
@@ -65,7 +65,7 @@ public class Voo {
         return this.previsaoChegada;
     }
 
-    public ArrayList<Cliente> getPassageiros(){
+    public ArrayList<Passageiro> getPassageiros(){
         return this.passageiros;
     }
 
@@ -124,14 +124,14 @@ public class Voo {
     //Funções como Publicadora
 
     public void notificarClientes(String notificacao){
-        for (Cliente cliente: this.passageiros){
+        for (Passageiro cliente: this.passageiros){
             cliente.receberNotificacao(notificacao);
         }
     }
 
     //Outras Funções
 
-    public String cadastrarCliente(Cliente cliente) throws Exception{
+    public String cadastrarCliente(Passageiro cliente) throws Exception{
         if(this.status instanceof Programado){
             if(this.assentosDisponiveis>0){
                 this.passageiros.add(cliente);
@@ -145,7 +145,7 @@ public class Voo {
         }
     }
 
-    public String removerCliente(Cliente cliente) throws Exception{
+    public String removerCliente(Passageiro cliente) throws Exception{
         if(this.status instanceof Programado){
             try{
                 this.passageiros.remove(cliente);
@@ -174,7 +174,7 @@ public class Voo {
         saida = saida + "Assentos Ocupados: " + this.assentosOcupados + "\n";
         saida = saida + "Tipo da Aeronave: " + this.aeronave.getTipo() + "\n";
         saida = saida + "Lista de Passageiros: \n\n";
-        for(Cliente cliente : this.passageiros){
+        for(Passageiro cliente : this.passageiros){
             saida = saida + cliente + "\n";
             saida = saida + "----------------------\n";
         }

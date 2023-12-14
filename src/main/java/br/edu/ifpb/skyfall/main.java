@@ -34,9 +34,9 @@ public class main {
         System.out.println("===========================");
         //Criação de Clientes
         System.out.println("Criando Clientes...");
-        Cliente cliente1 = new Cliente("Luiz Gonzaga", "123.456.789-10");
+        Passageiro cliente1 = new Passageiro("Luiz Gonzaga", "123.456.789-10");
         cliente1.definirNotificador(new EmailStrategy());
-        Cliente cliente2 = new Cliente("Louise Fernandes", "987.654.321-98");
+        Passageiro cliente2 = new Passageiro("Louise Fernandes", "987.654.321-98");
         cliente2.definirNotificador(new SmsStrategy());
         System.out.println(cliente1);
         System.out.println("-------------------");

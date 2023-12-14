@@ -3,12 +3,12 @@ package src.main.java.br.edu.ifpb.skyfall;
 import src.main.java.br.edu.ifpb.skyfall.Strategy.Notificador;
 import src.main.java.br.edu.ifpb.skyfall.Strategy.NotificadorStrategy;
 
-public class Cliente implements Assinante{
+public class Passageiro implements Assinante{
     private String nome;
     private String cpf;
     private Notificador notificador = new Notificador();
 
-    public Cliente(String nome, String cpf){
+    public Passageiro(String nome, String cpf){
         this.nome = nome;
         this.cpf = cpf;
     }
