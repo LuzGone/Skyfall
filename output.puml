@@ -1,0 +1,180 @@
+@startuml
+skinparam classAttributeIconSize 0
+class main{
++ {static} main(args : String[]) : void
+}
+class NotificadorBase{
++ NotificadorBase()
++ notificar(mensagem : String) : void
+}
+NotificadorBase ..|> Notificador
+class EmailDecorador{
++ EmailDecorador(notificador : Notificador)
++ notificar(mensagem : String) : void
++ notificarEmail(mensagem : String) : void
+}
+EmailDecorador --|> DecoradorBase
+class DecoradorBase{
+# notificador : Notificador
++ DecoradorBase(notificador : Notificador)
++ notificar(mensagem : String) : void
+}
+DecoradorBase ..|> Notificador
+class MudancaPortao{
+- voo : Voo
++ MudancaPortao(voo : Voo)
++ proximoStatus(status : Status) : void
++ confirmarVoo() : void
++ atrasarVoo(minutos : Long) : void
++ cancelarVoo() : void
++ finalizarVoo() : void
++ mudarPortao(novoPortao : String) : void
+}
+MudancaPortao ..|> Status
+class Finalizado{
+- voo : Voo
++ Finalizado(voo : Voo)
++ proximoStatus(status : Status) : void
++ confirmarVoo() : void
++ atrasarVoo(minutos : Long) : void
++ cancelarVoo() : void
++ finalizarVoo() : void
++ mudarPortao(novoPortao : String) : void
+}
+Finalizado ..|> Status
+class Atrasado{
+- voo : Voo
++ Atrasado(voo : Voo)
++ proximoStatus(status : Status) : void
++ confirmarVoo() : void
++ atrasarVoo(minutos : Long) : void
++ cancelarVoo() : void
++ finalizarVoo() : void
++ mudarPortao(novoPortao : String) : void
+}
+Atrasado ..|> Status
+class Programado{
+- voo : Voo
++ Programado(voo : Voo)
++ proximoStatus(status : Status) : void
++ confirmarVoo() : void
++ atrasarVoo(minutos : Long) : void
++ cancelarVoo() : void
++ finalizarVoo() : void
++ mudarPortao(novoPortao : String) : void
+}
+Programado ..|> Status
+class Voo{
+- codigo : Long
+- passageiros : ArrayList<Cliente>
+- status : Status
+- origem : String
+- destino : String
+- portaoEmbarque : String
+- data : LocalDateTime
+- previsaoPartida : LocalDateTime
+- previsaoChegada : LocalDateTime
+- aeronave : Aeronave
+- assentosDisponiveis : int
+- assentosOcupados : int
++ Voo(origem : String, destino : String, portaoEmbarque : String, data : LocalDateTime, previsaoPartida : LocalDateTime, previsaoChegada : LocalDateTime, aeronave : Aeronave)
++ getCodigo() : Long
++ getStatus() : Status
++ getPortao() : String
++ getPrevisaoPartida() : LocalDateTime
++ getPrevisaoChegada() : LocalDateTime
++ getPassageiros() : ArrayList<Cliente>
++ setStatus(status : Status) : void
++ cancelarVoo() : void
++ atrasarVoo(minutos : Long) : void
++ confirmarVoo() : void
++ mudarPortao(novoPortao : String) : void
++ finalizarVoo() : void
++ notificarClientes(notificacao : String) : void
++ cadastrarCliente(cliente : Cliente) : String
++ removerCliente(cliente : Cliente) : String
++ toString() : String
+}
+class PushDecorador{
++ PushDecorador(notificador : Notificador)
++ notificar(mensagem : String) : void
++ notificarPush(mensagem : String) : void
+}
+PushDecorador --|> DecoradorBase
+class SMSDecorador{
++ SMSDecorador(notificador : Notificador)
++ notificar(mensagem : String) : void
++ notificarSMS(mensagem : String) : void
+}
+SMSDecorador --|> DecoradorBase
+class Confirmado{
+- voo : Voo
++ Confirmado(voo : Voo)
++ proximoStatus(status : Status) : void
++ confirmarVoo() : void
++ atrasarVoo(minutos : Long) : void
++ cancelarVoo() : void
++ finalizarVoo() : void
++ mudarPortao(novoPortao : String) : void
+}
+Confirmado ..|> Status
+class Aeronave{
+- tipo : String
+- quantidadeDeAssentos : int
++ Aeronave(tipo : String, quantidadeDeAssentos : int)
++ getTipo() : String
++ getQuantidaDeAssentos() : int
++ toString() : String
+}
+class Cliente{
+- nome : String
+- cpf : String
+- notificador : Notificador
+- email : Boolean
+- push : Boolean
+- sms : Boolean
++ Cliente(nome : String, cpf : String, email : Boolean, push : Boolean, sms : Boolean)
++ definirNotificador() : void
++ getNome() : String
++ getCpf() : String
++ receberNotificacao(notificacao : String) : void
++ toString() : String
+}
+Cliente ..|> Assinante
+class Cancelado{
+- voo : Voo
++ Cancelado(voo : Voo)
++ proximoStatus(status : Status) : void
++ confirmarVoo() : void
++ atrasarVoo(minutos : Long) : void
++ cancelarVoo() : void
++ finalizarVoo() : void
++ mudarPortao(novoPortao : String) : void
+}
+Cancelado ..|> Status
+DecoradorBase--"# notificador" Notificador
+MudancaPortao--"- voo" Voo
+Finalizado--"- voo" Voo
+Atrasado--"- voo" Voo
+Programado--"- voo" Voo
+Voo--"- status" Status
+Voo--"- aeronave" Aeronave
+Confirmado--"- voo" Voo
+Cliente--"- notificador" Notificador
+Cancelado--"- voo" Voo
+interface Assinante{
++ receberNotificacao(notificacao : String) : void
+}
+interface Notificador{
++ notificar(mensagem : String) : void
+}
+interface Status{
++ proximoStatus(status : Status) : void
++ toString() : String
++ confirmarVoo() : void
++ cancelarVoo() : void
++ finalizarVoo() : void
++ mudarPortao(novoPortao : String) : void
++ atrasarVoo(minutos : Long) : void
+}
+@enduml

@@ -145,14 +145,18 @@ public class Voo {
         }
     }
 
-    public String removerCliente(Cliente cliente){
-        try{
-            this.passageiros.remove(cliente);
-            return "Cliente removido com Sucesso";
-        }catch (Exception e){
-            return "Cliente não Encontrado";
+    public String removerCliente(Cliente cliente) throws Exception{
+        if(this.status instanceof Programado){
+            try{
+                this.passageiros.remove(cliente);
+                return "Cliente removido com Sucesso";
+            }catch (Exception e){
+                throw new Exception("Cliente não Encontrado");
+            }
         }
-
+        else{
+            throw new Exception("Não pode remover cliente com voo fora do estado de Programado");
+        }
     }
 
     @Override

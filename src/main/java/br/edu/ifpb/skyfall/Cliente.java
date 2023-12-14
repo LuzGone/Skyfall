@@ -1,6 +1,5 @@
 package src.main.java.br.edu.ifpb.skyfall;
 
-import src.main.java.br.edu.ifpb.skyfall.Decorators.DecoradorBase;
 import src.main.java.br.edu.ifpb.skyfall.Decorators.EmailDecorador;
 import src.main.java.br.edu.ifpb.skyfall.Decorators.Notificador;
 import src.main.java.br.edu.ifpb.skyfall.Decorators.NotificadorBase;
