@@ -173,9 +173,10 @@ public class Voo {
         saida = saida + "Assentos Disponíveis: " + this.assentosDisponiveis + "\n";
         saida = saida + "Assentos Ocupados: " + this.assentosOcupados + "\n";
         saida = saida + "Tipo da Aeronave: " + this.aeronave.getTipo() + "\n";
-        saida = saida + "Lista de Passageiros: \n";
+        saida = saida + "Lista de Passageiros: \n\n";
         for(Cliente cliente : this.passageiros){
             saida = saida + cliente + "\n";
+            saida = saida + "----------------------\n";
         }
         return saida;
     }

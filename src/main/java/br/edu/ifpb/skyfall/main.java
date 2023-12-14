@@ -1,6 +1,9 @@
 package src.main.java.br.edu.ifpb.skyfall;
 import java.time.LocalDateTime;
 
+import src.main.java.br.edu.ifpb.skyfall.Strategy.EmailStrategy;
+import src.main.java.br.edu.ifpb.skyfall.Strategy.SmsStrategy;
+
 /**
  * main
  */
@@ -31,8 +34,10 @@ public class main {
         System.out.println("===========================");
         //Criação de Clientes
         System.out.println("Criando Clientes...");
-        Cliente cliente1 = new Cliente("Luiz Gonzaga", "123.456.789-10", true, false, true);
-        Cliente cliente2 = new Cliente("Louise Fernandes", "987.654.321-98", false, true, false);
+        Cliente cliente1 = new Cliente("Luiz Gonzaga", "123.456.789-10");
+        cliente1.definirNotificador(new EmailStrategy());
+        Cliente cliente2 = new Cliente("Louise Fernandes", "987.654.321-98");
+        cliente2.definirNotificador(new SmsStrategy());
         System.out.println(cliente1);
         System.out.println("-------------------");
         System.out.println(cliente2);
@@ -80,6 +85,6 @@ public class main {
         System.out.println("===========================");
         System.out.println("Status Final do Voo...");
         System.out.println(voo1);
-
+        System.out.println("===========================");
     }
 }
