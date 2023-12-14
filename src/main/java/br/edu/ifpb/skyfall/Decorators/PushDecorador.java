@@ -1,13 +1,13 @@
 package src.main.java.br.edu.ifpb.skyfall.Decorators;
 
 public class PushDecorador extends DecoradorBase{
-    public PushDecorador(Notificador notificador){
-        super(notificador);
+    public PushDecorador(Logger logger){
+        super(logger);
     }
 
     @Override
-    public void notificar(String mensagem){
-        super.notificar(mensagem);
+    public void registrarLog(String mensagem){
+        super.registrarLog(mensagem);
         this.notificarPush(mensagem);
     }
 

@@ -1,13 +1,13 @@
 package src.main.java.br.edu.ifpb.skyfall.Decorators;
 
 public class SMSDecorador extends DecoradorBase {
-    public SMSDecorador(Notificador notificador) {
-        super(notificador);
+    public SMSDecorador(Logger logger) {
+        super(logger);
     }
 
     @Override
-    public void notificar(String mensagem){
-        super.notificar(mensagem);
+    public void registrarLog(String mensagem){
+        super.registrarLog(mensagem);
         this.notificarSMS(mensagem);
     }
 

@@ -1,14 +1,14 @@
 package src.main.java.br.edu.ifpb.skyfall.Decorators;
-public class DecoradorBase implements Notificador {
+public class DecoradorBase implements Logger {
     
-    protected Notificador notificador;
+    protected Logger logger;
 
-    public DecoradorBase(Notificador notificador){
-        this.notificador = notificador;
+    public DecoradorBase(Logger logger){
+        this.logger = logger;
     }
 
     @Override
-    public void notificar(String mensagem){
-        this.notificador.notificar(mensagem);
+    public void registrarLog(String mensagem){
+        this.logger.registrarLog(mensagem);
     }
 }

@@ -1,13 +1,13 @@
 package src.main.java.br.edu.ifpb.skyfall.Decorators;
 
 public class EmailDecorador extends DecoradorBase{
-    public EmailDecorador(Notificador notificador){
-        super(notificador);
+    public EmailDecorador(Logger logger){
+        super(logger);
     }
 
     @Override
-    public void notificar(String mensagem){
-        super.notificar(mensagem);
+    public void registrarLog(String mensagem){
+        super.registrarLog(mensagem);
         this.notificarEmail(mensagem);
     }
 
